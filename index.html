@@ -1,0 +1,29 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://www.celljs.org/cell.js"></script>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script src="https://intercellular.github.io/forkme/forkme.js"></script>
+<style>
+  body { padding-top: 50px; }
+  #qr img { width: 100%; }
+  input { width: 100%; margin: 20px 0; padding: 10px; font-size: 14px; outline: none; }
+</style>
+<script>
+qr = {
+  $cell: true,
+  style: { position: "relative", textAlign: 'center', width: "500px", margin: "0 auto"},
+  $components: [{
+    $type: "input", type: "url", placeholder: "Enter JASON URL",
+    oninput: function(e) { document.querySelector("#qr")._make("jason://href?url="+this.value) }
+  }, {
+    id: "qr", _qr: null,
+    $init: function() { this._qr = new QRCode(this, 'https://www.celljs.org') },
+    _make: function(v) { this._qr.makeCode(v) }
+  }]
+}
+fork = {
+  $cell: true,
+  $components: [ ForkMe("https://github.com/Jasonette/jason.to.qrcode") ]
+}
+</script>
+</html>
